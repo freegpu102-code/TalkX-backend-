@@ -1,5 +1,11 @@
-// api/index.js
+// backend/api/index.js
 const serverless = require("serverless-http");
-const app = require("../server");
+const { app, connectDB } = require("../server");
 
-module.exports = serverless(app); 
+// Wrap Express app in serverless function
+const handler = async (req, res) => {
+  await connectDB(); // ensure MongoDB connection
+  return app(req, res); // handle request
+};
+
+module.exports = serverless(handler);
