@@ -54,5 +54,8 @@ app.use("/api/friends", require("./routes/friends"));
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 
-// Export app for serverless
-module.exports = { app, connectDB };
+// use port 3000 for local development
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
